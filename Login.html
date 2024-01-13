@@ -1,0 +1,410 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            position: relative;
+        }
+
+            body::before {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url('pics/3139767.jpg') center/cover no-repeat fixed;
+                z-index: -1;
+            }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 80px;
+            width: 330px;
+        }
+
+        .main {
+            height: 380px;
+            font-family: 'Lato', sans-serif;
+            position: relative;
+            padding: 20px;
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+        }
+
+            .logo img {
+                width: 50px;
+            }
+
+            .logo p {
+                margin-top: 10px;
+                color: #f84355;
+                font-size: 14px;
+                font-weight: 700;
+            }
+
+            .logo h3 {
+                color: #686868;
+                margin-top: 10px;
+            }
+
+            .logo span {
+                margin-top: 30px;
+                display: flex;
+                height: 100px;
+                width: 100px;
+                border-radius: 50%;
+                overflow: hidden;
+            }
+
+                .logo span img {
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+
+            .logo h4 {
+                margin-top: 10px;
+                color: #959595;
+            }
+
+        .input_text {
+            margin-top: 20px;
+            position: relative;
+        }
+
+        input[type="text"] {
+            height: 45px;
+            width: 100%;
+            border-radius: 30px;
+            padding: 5px 20px;
+            font-size: 14px;
+            background-color: #fafafa;
+            border: 0;
+            outline: 0;
+        }
+
+        input[type="password"] {
+            height: 45px;
+            width: 100%;
+            border-radius: 30px;
+            padding: 5px 20px;
+            font-size: 14px;
+            background-color: #fafafa;
+            border: 0;
+            outline: 0;
+            padding-right: 35px;
+        }
+
+        .button {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+            .button button {
+                height: 45px;
+                width: 120px;
+                border: none;
+                background-color: #7ac142;
+                border-radius: 30px;
+                color: #fff;
+                font-size: 13px;
+                cursor: pointer;
+                transition: all 0.5s;
+            }
+
+                .button button:hover {
+                    background-color: forestgreen;
+                }
+
+        .fa-angle-right {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .fa-arrow-left {
+            position: absolute;
+            top: 20px;
+            color: #4d2534;
+            cursor: pointer;
+        }
+
+        .fa-eye-slash {
+            position: absolute;
+            right: 20px;
+            top: 14px;
+            cursor: pointer;
+            color: #ed4b56;
+        }
+
+        .fa-eye {
+            position: absolute;
+            right: 12px;
+            top: 14px;
+            cursor: pointer;
+            color: #ed4b56;
+        }
+
+        .warning {
+            border: 1px solid red !important;
+        }
+
+        .m_top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+            .m_top p {
+                margin-top: 10px;
+                color: #999999;
+                font-size: 14px;
+                text-align: center;
+            }
+
+        .mt {
+            margin-top: 249px !important;
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #7ac142;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 1;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            margin: 5% auto;
+            box-shadow: inset 0px 0px 0px #7ac142;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+            margin-top: 4em;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes scale {
+            0%, 100% {
+                transform: none;
+            }
+
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 30px #7ac142;
+            }
+        }
+
+        .custom-button {
+            margin-left: 6.5em;
+        }
+
+        input[type=email] {
+            height: 45px;
+            width: 100%;
+            border-radius: 30px;
+            padding: 5px 20px;
+            font-size: 14px;
+            background-color: #fafafa;
+            border: 0;
+            outline: 0;
+            padding-right: 35px;
+        }
+
+        .profile {
+            width: 150px;
+            height: 50px;
+            border-radius: 40%;
+            margin-top: 0.5em;
+        }
+
+        .logo p {
+            font-size: 30px;
+            color: greenyellow;
+            margin-top: 1em;
+            text-shadow: 2px 2px #4d2534;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="main active">
+                    <div class="logo">
+                        <p>Login</p>
+                        <h4>Welcome back!</h4>
+                    </div>
+                    <div class="input_text"> <input type="text" placeholder="Username" required> </div>
+                    <div class="button"> <button class="next">Next</button> <i class="fa fa-angle-right"></i>  </div>
+                </div>
+
+                <div class="main">
+                    <div class="logo">
+                        <p>Login</p>
+                        <h4>Welcome back!</h4>
+                    </div>
+                    <div class="input_text">
+                        <input type="password" placeholder="Enter Password" required>
+                    </div>
+                    <div class="button">
+                        <button class="next">Next</button> <i class="fa fa-angle-right"></i>
+                    </div>
+                </div>
+                <div class="main ">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                    </svg>
+                    <div class="m_top">
+                        <h3>Welcome Back! <span class="shown_name"></span></h3>
+                        <p>Dear Member hope you continue your journey with us!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var click_next = document.querySelectorAll(".next");
+        var click_back = document.querySelectorAll(".back_page");
+        var click_submit = document.querySelector(".submit");
+        var click_main = document.querySelectorAll(".main");
+        var progress = document.querySelectorAll(".progress_bar li");
+
+        var eye = document.querySelector(".fa-eye-slash");
+        var pass = document.querySelector(".pass");
+        var seteye = document.querySelector(".fa-eye-slash");
+
+        let formnumber = 0;
+
+
+
+        // Add event listeners for all "Next" buttons
+        click_next.forEach(function (nextButton, index) {
+            nextButton.addEventListener('click', function () {
+                if (!validateform()) {
+                    return false;
+                }
+                formnumber = index + 1;
+                updateform();
+                progress_forward();
+            });
+        });
+
+        // Add event listeners for all "Back" buttons
+        click_back.forEach(function (backButton) {
+            backButton.addEventListener('click', function () {
+                formnumber--;
+                updateform();
+                progress_back();
+            });
+        });
+
+        click_submit.addEventListener('click', function () {
+            if (!validateform()) {
+                return false;
+            }
+            formnumber++;
+            updateform();
+        });
+
+        function progress_forward() {
+            progress[formnumber].classList.add('active');
+        }
+
+        function progress_back() {
+            var back_p = formnumber + 1;
+            progress[back_p].classList.remove('active');
+        }
+
+        function updateform() {
+            click_main.forEach(function (form) {
+                form.classList.remove('active');
+            });
+            click_main[formnumber].classList.add('active');
+            progress_forward();
+        }
+
+        function validateform() {
+            var validate = true;
+            var inputs = document.querySelectorAll(".main.active input");
+            inputs.forEach(function (inpt) {
+                inpt.classList.remove('warning');
+                if (inpt.hasAttribute("required")) {
+                    if (inpt.value.length == 0) {
+                        validate = false;
+                        inpt.classList.add('warning');
+                    }
+                }
+            });
+            return validate;
+        }
+
+    </script>
+</body >
+</html >
